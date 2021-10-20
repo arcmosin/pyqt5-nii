@@ -40,6 +40,7 @@ class MainDialogImgBW(QDialog,Ui_Dialog):
         self.radioButton.clicked.connect(self.bindradiobutton)
         self.radioButton_2.clicked.connect(self.bindradiobutton)
 
+
     def Calculate(self,data1,data2):
         slice_idx = self.horizontalSlider.value()
         mean=0
@@ -81,9 +82,9 @@ class MainDialogImgBW(QDialog,Ui_Dialog):
             array1 = list(data2[:, :, slice_idx - 1])
             a = len(array1)
             b = len(array1[0])
-            pic = [[0] * a for i in range(b)]
-            for i in range(a):
-                for j in range(b):
+            pic = [[0] * b for i in range(a)]
+            for i in range(0,a):
+                for j in range(0,b):
                     if array1[i][j] == 0:
                         pic[i][j] = [0, 0, 0, 0]
                     else:
