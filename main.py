@@ -1,9 +1,4 @@
-# This is a sample Python script.
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import sys
 import numpy as np
@@ -18,18 +13,21 @@ class MainDialogImgBW(QDialog,Ui_Dialog):
     def __init__(self):
         super(MainDialogImgBW,self).__init__()
         self.setupUi(self)
-        self.setWindowTitle("显示matplotlib绘制图形")
+        self.setWindowTitle("显示nii图像")
         self.setMinimumSize(0,0)
 
+        #创建存放nii文件路径的属性
         self.nii_path=''
+        #创建存放mask文件路径的属性
         self.mask_path = ''
+        #创建记录nii文件里面图片数量的属性
         self.shape=1
-        self.check=0
+        #创建用于检查radio button选择标记的属性，选择'nii图像'，为0，现在‘mask图像’，为1
+        self.check = 0
 
-        #第五步：定义MyFigure类的一个实例
+        #定义MyFigure类的一个实例
         self.F = MyFigure(width=3, height=2, dpi=100)
-        #self.F.plotsin()
-        #第六步：在GUI的groupBox中创建一个布局，用于添加MyFigure类的实例（即图形）后其他部件。
+        #在GUI的groupBox中创建一个布局，用于添加MyFigure类的实例（即图形）后其他部件。
         self.gridlayout = QGridLayout(self.groupBox)  # 继承容器groupBox
         self.gridlayout.addWidget(self.F,0,1)
 
@@ -43,8 +41,6 @@ class MainDialogImgBW(QDialog,Ui_Dialog):
 
     def Calculate(self,data1,data2):
         slice_idx = self.horizontalSlider.value()
-        mean=0
-        var=0
         arr=[]
         array1 = list(data1[:, :, slice_idx - 1])
         array2 = list(data2[:, :, slice_idx - 1])
@@ -132,5 +128,4 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     main = MainDialogImgBW()
     main.show()
-    #app.installEventFilter(main)
     sys.exit(app.exec_())
