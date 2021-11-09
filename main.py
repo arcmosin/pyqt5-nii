@@ -33,6 +33,7 @@ class MainDialogImgBW(QDialog,Ui_Dialog):
 
         self.pushButton.clicked.connect(self.bindButton)
         self.pushButton_2.clicked.connect(self.bindButton2)
+        self.pushButton_3.clicked.connect(self.bindButton3)
         self.horizontalSlider.valueChanged.connect(self.bindSlider)
         self.spinBox.valueChanged.connect(self.bindSpinbox)
         self.radioButton.clicked.connect(self.bindradiobutton)
@@ -75,20 +76,13 @@ class MainDialogImgBW(QDialog,Ui_Dialog):
         ax.imshow(data1[:, :, slice_idx - 1], cmap='gray')
 
         if self.check==1:
-            array1 = list(data2[:, :, slice_idx - 1])
-            a = len(array1)
-            b = len(array1[0])
-            pic = [[0] * b for i in range(a)]
-            for i in range(0,a):
-                for j in range(0,b):
-                    if array1[i][j] == 0:
-                        pic[i][j] = [0, 0, 0, 0]
-                    else:
-                        pic[i][j] = [255, 0, 0, 100]
-
+            pic=np.mat(data2[:, :, slice_idx - 1])
+            array_zero=np.zeros(pic.shape)
+            pic=np.array([pic*255,array_zero,array_zero,pic*100])
+            pic=pic.transpose((1,2,0))
+            pic=np.uint(pic)
             ax.imshow(pic, cmap='viridis')
-            del array1
-            del pic
+
         if not self.mask_path == '':
             self.Calculate(data1, data2)
 
@@ -123,6 +117,26 @@ class MainDialogImgBW(QDialog,Ui_Dialog):
         file_name = QFileDialog.getOpenFileName(None, "Open File", "./", "nii(*.nii.gz;*.nii)")
         self.mask_path = file_name[0]
         self.textBrowser.append("mask图像已加载\n")
+
+    def bindButton3(self):
+        slice_idx = self.spinBox.value()
+        data_nii = nib.load(Path(self.nii_path))
+        data1 = data_nii.get_fdata()
+        csv_save=data1[:, :, slice_idx - 1]
+        if (self.mask_path!='') & self.check==1:
+            data_mask = nib.load(Path(self.mask_path))
+            data2 = data_mask.get_fdata()
+            array1 = list(data2[:, :, slice_idx - 1])
+            a = len(array1)
+            b = len(array1[0])
+            for i in range(0,a):
+                for j in range(0,b):
+                    if array1[i][j] == 0:
+                        csv_save[i][j] = 0
+                    else:
+                        pass
+        csv_save1=np.uint8(csv_save)
+        np.savetxt(f"{slice_idx}.csv",csv_save1, delimiter=",",fmt='%u')
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

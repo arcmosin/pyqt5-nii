@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(880, 754)
+        Dialog.resize(876, 745)
         self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
         self.buttonBox.setGeometry(QtCore.QRect(670, 710, 201, 32))
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
@@ -46,12 +46,15 @@ class Ui_Dialog(object):
         self.pushButton_2.setGeometry(QtCore.QRect(90, 150, 93, 28))
         self.pushButton_2.setObjectName("pushButton_2")
         self.radioButton = QtWidgets.QRadioButton(Dialog)
-        self.radioButton.setGeometry(QtCore.QRect(90, 240, 115, 19))
+        self.radioButton.setGeometry(QtCore.QRect(90, 220, 115, 19))
         self.radioButton.setChecked(True)
         self.radioButton.setObjectName("radioButton")
         self.radioButton_2 = QtWidgets.QRadioButton(Dialog)
-        self.radioButton_2.setGeometry(QtCore.QRect(90, 280, 115, 19))
+        self.radioButton_2.setGeometry(QtCore.QRect(90, 260, 115, 19))
         self.radioButton_2.setObjectName("radioButton_2")
+        self.pushButton_3 = QtWidgets.QPushButton(Dialog)
+        self.pushButton_3.setGeometry(QtCore.QRect(90, 310, 93, 28))
+        self.pushButton_3.setObjectName("pushButton_3")
 
         self.retranslateUi(Dialog)
         self.buttonBox.accepted.connect(Dialog.accept)
@@ -65,3 +68,4 @@ class Ui_Dialog(object):
         self.pushButton_2.setText(_translate("Dialog", "读取mask图像"))
         self.radioButton.setText(_translate("Dialog", "nii图片"))
         self.radioButton_2.setText(_translate("Dialog", "mask图片"))
+        self.pushButton_3.setText(_translate("Dialog", "保存CSV文件"))

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>880</width>
-    <height>754</height>
+    <width>876</width>
+    <height>745</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -121,7 +121,7 @@
    <property name="geometry">
     <rect>
      <x>90</x>
-     <y>240</y>
+     <y>220</y>
      <width>115</width>
      <height>19</height>
     </rect>
@@ -137,13 +137,26 @@
    <property name="geometry">
     <rect>
      <x>90</x>
-     <y>280</y>
+     <y>260</y>
      <width>115</width>
      <height>19</height>
     </rect>
    </property>
    <property name="text">
     <string>mask图片</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_3">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>310</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>保存CSV文件</string>
    </property>
   </widget>
  </widget>
